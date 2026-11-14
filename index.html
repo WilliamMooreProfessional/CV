@@ -542,7 +542,14 @@
     </div><!-- END OF PAGE 2 (#achievements-page) -->
 
   </div><!-- END OF .container -->
-
+  <script>
+    document.getElementById('page-switch').addEventListener('change', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
 </body>
 </html>
 
