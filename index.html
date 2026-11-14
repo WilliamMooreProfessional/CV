@@ -299,10 +299,15 @@
       font-size: 0.88rem;
       color: #2c423b;
     }
-    /* Two-Page Switcher */
-    #page-switch {
+       /* Two-Page Switcher */
+    #achievements-page {
       display: none;
     }
+    .page-active {
+      display: block !important;
+      animation: pageFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     #achievements-page {
       display: none;
     }
@@ -443,8 +448,7 @@
 <body>
 
   <div class="container">
-    <input type="checkbox" id="page-switch">
-
+    
     <!-- PAGE 1: MAIN CV -->
     <div id="cv-page">
       <header>
@@ -661,9 +665,10 @@
       </section>
 
       <div class="nav-bar-bottom">
-        <label for="page-switch" class="page-nav-btn">
+                <button type="button" class="page-nav-btn" onclick="switchPage('achievements')">
           Next: Achievements <i data-lucide="arrow-right"></i>
-        </label>
+        </button>
+
       </div>
     </div><!-- END OF PAGE 1 (#cv-page) -->
 
@@ -735,9 +740,10 @@
       </section>
 
       <div class="nav-bar-bottom" style="justify-content: flex-start;">
-        <label for="page-switch" class="page-nav-btn secondary">
+                <button type="button" class="page-nav-btn secondary" onclick="switchPage('cv')">
           <i data-lucide="arrow-left"></i> Back to CV
-        </label>
+        </button>
+
       </div>
     </div><!-- END OF PAGE 2 (#achievements-page) -->
 
@@ -746,11 +752,23 @@
   <script>
     lucide.createIcons();
 
-    document.getElementById('page-switch').addEventListener('change', function() {
-      setTimeout(function() {
-        document.querySelector('.container').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
-    });
+    function switchPage(target) {
+      var cvPage = document.getElementById('cv-page');
+      var achPage = document.getElementById('achievements-page');
+
+      if (target === 'achievements') {
+        cvPage.style.display = 'none';
+        achPage.classList.add('page-active');
+      } else {
+        achPage.classList.remove('page-active');
+        achPage.style.display = 'none';
+        cvPage.style.display = 'block';
+      }
+
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
   </script>
 </body>
 </html>
