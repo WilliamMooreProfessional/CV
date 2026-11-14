@@ -10,7 +10,7 @@
     * {
       box-sizing: border-box;
     }
-    body {
+        body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.6;
       color: #222;
@@ -20,7 +20,9 @@
       background-color: #f2f6f5;
       background-image: radial-gradient(#dce7e3 1px, transparent 1px);
       background-size: 20px 20px;
+      overflow-anchor: none;
     }
+
     .container {
       background: #fff;
       padding: 48px;
@@ -741,25 +743,17 @@
 
   </div><!-- END OF .container -->
 
-   <script>
+  <script>
     lucide.createIcons();
 
-    function scrollToTopSmoothly() {
-      requestAnimationFrame(function() {
-        setTimeout(function() {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
-          document.body.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 30);
-      });
-    }
-
-    document.getElementById('page-switch').addEventListener('change', scrollToTopSmoothly);
-    document.querySelectorAll('.page-nav-btn').forEach(function(btn) {
-      btn.addEventListener('click', scrollToTopSmoothly);
+    document.getElementById('page-switch').addEventListener('change', function() {
+      setTimeout(function() {
+        document.querySelector('.container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
     });
   </script>
 </body>
 </html>
+
 
 
