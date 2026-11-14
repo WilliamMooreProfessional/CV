@@ -741,16 +741,25 @@
 
   </div><!-- END OF .container -->
 
-  <script>
+   <script>
     lucide.createIcons();
 
-    document.getElementById('page-switch').addEventListener('change', function() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    function scrollToTopSmoothly() {
+      requestAnimationFrame(function() {
+        setTimeout(function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+          document.body.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 30);
       });
+    }
+
+    document.getElementById('page-switch').addEventListener('change', scrollToTopSmoothly);
+    document.querySelectorAll('.page-nav-btn').forEach(function(btn) {
+      btn.addEventListener('click', scrollToTopSmoothly);
     });
   </script>
+</body>
 
 </body>
 </html>
